@@ -1,0 +1,68 @@
+
+** 
+from django.db import models
+
+ from crm.models import Employees
+
+class Employees(models.Model):
+
+    name=models.CharField(max_length=200)
+    department=models.CharField(max_length=200)
+    salary=models.PositiveIntegerField()
+    email=models.EmailField(unique=True)
+    age=models.IntegerField()
+    contact=models.CharField(null=True,max_length=200)
+
+
+-----------orm query for create a new object------------
+
+ >>>Employees.objects.create(Field)
+
+
+ --------orm query for fetching all recording-----------
+
+ >>>QS=Employees.objects.all()
+
+---------- orm query for  fetching a specific Employees-------
+
+ >>>qs=Employees.objects.get(id=1) for 1
+
+-----------orm query for filtering Employees records----------
+
+ >>>qs=Employees.objects.filter(department="developer")
+ >>> qs=Employees.objects.filter(salary__gte=50000 )for greaterthan equal
+ >>>qs=Employees.objects.filter(salary__lte=45000) for less than equal
+
+__gte(greaterthan)
+__lte(lessthan)
+
+-----------orm query for excuding object---------
+
+>>>qs=Employees.objects.exclude(department="hr")
+
+
+
+
+    ((def __str__(self) :
+        return self.name)) for string repre of object
+
+
+
+
+
+
+
+
+------------------update----------------
+
+>>>Employees.objects.filter(id=1).update(Field)
+
+-------------------delet---------------
+
+>>>Employees.objects.filter(id=1).delete()
+
+
+--------------sort according to specification-------------
+
+>>>Employees.objects.all().order_by(salary)==> in assen
+>>> qs=Employees.objects.all().order_by("-salary") ==>in desc
